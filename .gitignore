@@ -2,3 +2,8 @@
 /DerivedDataCache/**
 /Saved/**
 /.vs/**
+.DS_Store
+*.xcsettings
+.idea
+/Binaries
+*.xcworkspacedata
