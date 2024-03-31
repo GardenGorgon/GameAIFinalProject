@@ -216,6 +216,8 @@ bool UGASpatialComponent::ChoosePosition(bool PathfindToPosition, bool Debug)
 			}
 		}
 
+
+		/*
 		//HACK TO MAKE US GO TO THE BEST PERCEPTION CELL
 		FTargetCache value;
 		FTargetData dummy;
@@ -228,11 +230,6 @@ bool UGASpatialComponent::ChoosePosition(bool PathfindToPosition, bool Debug)
 			BestCell = Grid->GetCellRef(almostBestCell);
 		}
 		else if (value.State == ETargetState::GATS_Immediate) {
-			BestCell = Grid->GetCellRef(almostBestCell);
-		}
-
-		/*
-		else {
 			BestCell = Grid->GetCellRef(almostBestCell);
 		}
 		*/
