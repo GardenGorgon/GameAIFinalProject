@@ -10,7 +10,7 @@ UGAPerceptionComponent::UGAPerceptionComponent(const FObjectInitializer& ObjectI
 
 	// Default vision parameters
 	VisionParameters.VisionAngle = 90.0f;
-	VisionParameters.VisionDistance = 1000.0;
+	VisionParameters.VisionDistance = 8000.0;
 }
 
 
@@ -152,7 +152,9 @@ void UGAPerceptionComponent::UpdateTargetData(UGATargetComponent* TargetComponen
 	// REMEMBER: the UGAPerceptionComponent is going to be attached to the controller, not the pawn. So we call this special accessor to 
 	// get the pawn that our controller is controlling
 	APawn* OwnerPawn = GetOwnerPawn();
+	// need to get the rocket info
 	AActor* TargetOwner = TargetComponent->GetOwner();
+	
 	//APawn* PlayerPawn = UGameplayStatics::GetPlayerPawn(this, 0);
 	APawn* TargetPawn = Cast<APawn>(TargetOwner);
 
