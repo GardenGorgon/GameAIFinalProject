@@ -156,7 +156,7 @@ void UGAPerceptionComponent::UpdateTargetData(UGATargetComponent* TargetComponen
 	AActor* TargetOwner = TargetComponent->GetOwner();
 	
 	//APawn* PlayerPawn = UGameplayStatics::GetPlayerPawn(this, 0);
-	APawn* TargetPawn = Cast<APawn>(TargetOwner);
+	//APawn* TargetPawn = Cast<APawn>(TargetOwner);
 
 	FTargetData *TargetData = TargetMap.Find(TargetComponent->TargetGuid);
 	if (TargetData == NULL)		// If we don't already have a target data for the given target component, add it
@@ -185,7 +185,7 @@ void UGAPerceptionComponent::UpdateTargetData(UGATargetComponent* TargetComponen
 		FVector OwnerPawnForward = OwnerPawn->GetActorForwardVector();
 
 		// Calculate the vector between both pawns
-		FVector DirectionToTarget = TargetPawn->GetActorLocation() - OwnerPawn->GetActorLocation();
+		FVector DirectionToTarget = TargetOwner->GetActorLocation() - OwnerPawn->GetActorLocation();
 		DirectionToTarget.Z = 0.0f; // Ignore height difference
 
 		// Normalize both vectors
@@ -197,7 +197,7 @@ void UGAPerceptionComponent::UpdateTargetData(UGATargetComponent* TargetComponen
 
 		// Calculate the angle between the vectors in degrees
 		float AngleInDegrees = FMath::RadiansToDegrees(FMath::Acos(DotProduct));
-		float Distance = FVector::Dist(OwnerPawn->GetActorLocation(), TargetPawn->GetActorLocation());
+		float Distance = FVector::Dist(OwnerPawn->GetActorLocation(), TargetOwner->GetActorLocation());
 		bool clearLosRes = false;
 
 		if (AngleInDegrees <= VisionParameters.VisionAngle/2 && Distance <= VisionParameters.VisionDistance)
@@ -207,9 +207,9 @@ void UGAPerceptionComponent::UpdateTargetData(UGATargetComponent* TargetComponen
 			FHitResult HitResult;
 			FCollisionQueryParams Params;
 			FVector Start = OwnerPawn->GetActorLocation();		// need a ray start
-			FVector End = TargetPawn->GetActorLocation();
+			FVector End = TargetOwner->GetActorLocation();
 			Params.AddIgnoredActor(OwnerPawn);
-			Params.AddIgnoredActor(TargetPawn);
+			Params.AddIgnoredActor(TargetOwner);
 			bool bHitSomething = World->LineTraceSingleByChannel(HitResult, Start, End, ECollisionChannel::ECC_Visibility, Params);
 			if (!bHitSomething) { // If bHitSomething is false, then we have a clear LOS
 				clearLosRes = true;
