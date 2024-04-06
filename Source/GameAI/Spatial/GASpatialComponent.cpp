@@ -217,15 +217,25 @@ bool UGASpatialComponent::ChoosePosition(bool PathfindToPosition, bool Debug)
 		}
 
 
-		/*
+		
 		//HACK TO MAKE US GO TO THE BEST PERCEPTION CELL
+		/*
 		FTargetCache value;
 		FTargetData dummy;
 		PerceptionComponentPtr->GetCurrentTargetState(value, dummy);
-		FVector almostBestCell = value.Position;
+		FVector rocketLocation = value.Position;
+		FVector rocketV = value.Velocity;
+
+		FVector anticipatedVector = value.Position 
+		for (int distance = 0; distance <= 1000; distance += 50) {
+			FVector anticipatedVector = value.Position+FVector()
+			rocketLocation+
+		}
 
 		BestCell = Grid->GetCellRef(StartLocation);
+		*/
 
+		/*
 		if(value.State == ETargetState::GATS_Hidden) {
 			BestCell = Grid->GetCellRef(almostBestCell);
 		}
