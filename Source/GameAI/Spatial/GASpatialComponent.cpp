@@ -184,6 +184,35 @@ bool UGASpatialComponent::ChoosePosition(bool PathfindToPosition, bool Debug)
 			// figure out how to evaluate each layer type, and accumulate the value in the GridMap
 			EvaluateLayer(Layer, DistanceMap, GridMap);
 		}
+		FTargetCache value;
+		FTargetData dummy;
+		PerceptionComponentPtr->GetCurrentTargetState(value, dummy);
+		if (PerceptionComponentPtr->TargetMap.Num() != 0) {
+			FVector rocketLocation = value.Position;
+			FVector rocketVelocity = value.Velocity;
+			//FVector rocketVelocity2D = rocketVelocity.GetSafeNormal2D();
+			//FCellRef currentRocketCell = Grid->GetCellRef(rocketLocation);
+			for (int i = 0; i < 5000; i++) {
+				FVector rocketFutureLoc = rocketLocation + (rocketVelocity * i);
+				FCellRef dodgeCell = Grid->GetCellRef(rocketFutureLoc);
+				for (int x = -2; x <= 2; x++) {
+					for (int y = -2; y <= 2; y++) {
+						FCellRef dodgeCell2 = FCellRef(dodgeCell.X + x, dodgeCell.Y + y);
+						if (dodgeCell != FCellRef::Invalid) {
+							GridMap.SetValue(dodgeCell2, 0.0f);
+						}
+					}
+				}
+			}
+		}
+		/*
+		FVector rocketFutureLoc = rocketLocation + rocketVelocity;
+		FCellRef dodgeCell = Grid->GetCellRef(rocketLocation);
+		if(dodgeCell!=FCellRef::Invalid){
+			GridMap.SetValue(dodgeCell, 0.0f);
+		}
+		*/
+
 
 		// Step 3: pick the best cell in GridMap
 
@@ -224,16 +253,16 @@ bool UGASpatialComponent::ChoosePosition(bool PathfindToPosition, bool Debug)
 		FTargetData dummy;
 		PerceptionComponentPtr->GetCurrentTargetState(value, dummy);
 		FVector rocketLocation = value.Position;
-		FVector rocketV = value.Velocity;
+		FVector rocketVelocity = value.Velocity;
 
 		FVector anticipatedVector = value.Position 
 		for (int distance = 0; distance <= 1000; distance += 50) {
 			FVector anticipatedVector = value.Position+FVector()
 			rocketLocation+
 		}
-
-		BestCell = Grid->GetCellRef(StartLocation);
 		*/
+		//BestCell = Grid->GetCellRef(StartLocation);
+		
 
 		/*
 		if(value.State == ETargetState::GATS_Hidden) {

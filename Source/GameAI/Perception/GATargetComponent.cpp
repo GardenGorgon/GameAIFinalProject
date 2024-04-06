@@ -103,7 +103,8 @@ void UGATargetComponent::TickComponent(float DeltaTime, enum ELevelTick TickType
 		LastKnownState.State = GATS_Immediate;
 
 		// REFRESH MY STATE
-		LastKnownState.Set(Owner->GetActorLocation(), Owner->GetVelocity());
+		//LastKnownState.Set(Owner->GetActorLocation(), Owner->GetVelocity());
+		LastKnownState.Set(Owner->GetActorLocation(), Owner->GetActorForwardVector());
 
 		// Tell the omap to clear out and put all the probability in the observed location
 		OccupancyMapSetPosition(LastKnownState.Position);

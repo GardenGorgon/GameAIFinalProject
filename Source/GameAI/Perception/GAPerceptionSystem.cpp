@@ -24,7 +24,9 @@ bool UGAPerceptionSystem::UnregisterPerceptionComponent(UGAPerceptionComponent* 
 
 bool UGAPerceptionSystem::RegisterTargetComponent(UGATargetComponent* TargetComponent)
 {
-	TargetComponents.AddUnique(TargetComponent);
+	//TargetComponents.AddUnique(TargetComponent);
+	TargetComponents.Empty();
+	TargetComponents.Insert(TargetComponent,0);
 	return true;
 }
 

@@ -9,8 +9,8 @@ UGAPerceptionComponent::UGAPerceptionComponent(const FObjectInitializer& ObjectI
 	PrimaryComponentTick.bCanEverTick = true;
 
 	// Default vision parameters
-	VisionParameters.VisionAngle = 90.0f;
-	VisionParameters.VisionDistance = 8000.0;
+	VisionParameters.VisionAngle = 270.0f;
+	VisionParameters.VisionDistance = 20000.0;
 }
 
 
