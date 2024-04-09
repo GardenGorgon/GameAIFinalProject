@@ -107,7 +107,7 @@ void UGATargetComponent::TickComponent(float DeltaTime, enum ELevelTick TickType
 		LastKnownState.Set(Owner->GetActorLocation(), Owner->GetActorForwardVector());
 
 		// Tell the omap to clear out and put all the probability in the observed location
-		OccupancyMapSetPosition(LastKnownState.Position);
+		//OccupancyMapSetPosition(LastKnownState.Position);
 	}
 	else if (IsKnown())
 	{
@@ -116,14 +116,14 @@ void UGATargetComponent::TickComponent(float DeltaTime, enum ELevelTick TickType
 
 	if (LastKnownState.State == GATS_Hidden)
 	{
-		OccupancyMapUpdate();
+		//OccupancyMapUpdate();
 	}
 
 	// As long as I'm known, whether I'm immediate or not, diffuse the probability in the omap
 
 	if (IsKnown())
 	{
-		OccupancyMapDiffuse();
+		//OccupancyMapDiffuse();
 	}
 
 	if (bDebugOccupancyMap)
