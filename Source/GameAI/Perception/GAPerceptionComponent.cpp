@@ -219,10 +219,10 @@ void UGAPerceptionComponent::UpdateTargetData(UGATargetComponent* TargetComponen
 		
 		float oldAwareness = TargetData->Awareness;
 		if (TargetData->bClearLos == true) {
-			oldAwareness = oldAwareness + 0.1;
+			oldAwareness = oldAwareness + 1;
 		}
 		else {
-			oldAwareness = oldAwareness - 0.1;
+			oldAwareness = oldAwareness - 1;
 		}
 		TargetData->Awareness = FMath::Clamp(oldAwareness, 0.0f, 1.0f);
 	}
